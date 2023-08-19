@@ -2,13 +2,13 @@
 
 namespace AMO;
 
-use AmoCRM\OAuth2\Client\Provider\AmoCRMResourceOwner;
 use Exception;
 use League\OAuth2\Client\Grant\AuthorizationCode;
 use League\OAuth2\Client\Token\AccessToken;
 
 class oAuth
 {
+
     public function __construct()
     {
         session_start();
@@ -22,36 +22,9 @@ class oAuth
         }
 
         if (!isset($_GET['code'])) {
-            /**
-             * Просто отображаем кнопку авторизации или получаем ссылку для авторизации
-             * По-умолчанию - отображаем кнопку
-             */
-            $_SESSION['oauth2state'] = bin2hex(random_bytes(16));
-            if (true) {
-                echo '<div>
-                <script
-                    class="amocrm_oauth"
-                    charset="utf-8"
-                    data-client-id="' . $provider->getClientId() . '"
-                    data-title="Установить интеграцию"
-                    data-compact="false"
-                    data-class-name="className"
-                    data-color="default"
-                    data-state="' . $_SESSION['oauth2state'] . '"
-                    data-error-callback="handleOauthError"
-                    src="https://www.amocrm.ru/auth/button.min.js"
-                ></script>
-                </div>';
-                echo '<script>
-            handleOauthError = function(event) {
-                alert(\'ID клиента - \' + event.client_id + \' Ошибка - \' + event.error);
-            }
-            </script>';
-                die;
-            } else {
-                $authorizationUrl = $provider->getAuthorizationUrl(['state' => $_SESSION['oauth2state']]);
-                header('Location: ' . $authorizationUrl);
-            }
+
+            $authorizationUrl = $provider->getAuthorizationUrl(['state' => $_SESSION['oauth2state']]);
+            header('Location: ' . $authorizationUrl);
         } elseif (empty($_GET['state']) || empty($_SESSION['oauth2state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
             unset($_SESSION['oauth2state']);
             exit('Invalid state');
@@ -77,9 +50,6 @@ class oAuth
         } catch (Exception $e) {
             die((string)$e);
         }
-
-        /** @var AmoCRMResourceOwner $ownerDetails */
-        $ownerDetails = $provider->getResourceOwner($accessToken);
 
         header('Location: /');
     }
