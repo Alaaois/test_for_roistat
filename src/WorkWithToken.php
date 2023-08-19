@@ -4,7 +4,7 @@ namespace AMO;
 
 use League\OAuth2\Client\Token\AccessToken;
 
-const TOKEN_FILE = 'token_info.json';
+const TOKEN_FILE = __DIR__ . '/token_info.json';
 
 class WorkWithToken
 {
