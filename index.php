@@ -7,5 +7,5 @@ use Amo\WorkWithToken;
 if ((new WorkWithToken())->checkExpires()) {
     new Form();
 } else {
-    header('Location: /getaccess.php');
+    header('Location: /getAccess.php');
 }
