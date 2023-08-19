@@ -6,7 +6,7 @@ use Exception;
 use League\OAuth2\Client\Grant\AuthorizationCode;
 use League\OAuth2\Client\Token\AccessToken;
 
-class oAuth
+class OAuth
 {
 
     public function __construct()

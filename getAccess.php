@@ -2,6 +2,6 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use AMO\oAuth;
+use AMO\OAuth;
 
-new oAuth();
+new OAuth();
